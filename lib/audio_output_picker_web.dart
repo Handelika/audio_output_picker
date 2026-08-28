@@ -59,7 +59,9 @@ class AudioOutputPickerWeb extends AudioOutputPickerPlatform {
         final device = jsDevices[i];
         if (device.kind == 'audiooutput') {
           final id = device.deviceId;
-          final label = device.label.isNotEmpty ? device.label : 'Audio Output ${devices.length + 1}';
+          final label = device.label.isNotEmpty
+              ? device.label
+              : 'Audio Output ${devices.length + 1}';
           devices.add(
             AudioOutputDevice(
               id: id,
@@ -96,7 +98,14 @@ class AudioOutputPickerWeb extends AudioOutputPickerPlatform {
     final outputs = await getAvailableAudioOutputs();
     return outputs.firstWhere(
       (d) => d.isSelected,
-      orElse: () => outputs.isNotEmpty ? outputs.first : const AudioOutputDevice(id: 'default', name: 'Default Audio Output', type: AudioOutputType.speaker, isSelected: true),
+      orElse: () => outputs.isNotEmpty
+          ? outputs.first
+          : const AudioOutputDevice(
+              id: 'default',
+              name: 'Default Audio Output',
+              type: AudioOutputType.speaker,
+              isSelected: true,
+            ),
     );
   }
 
@@ -111,7 +120,9 @@ class AudioOutputPickerWeb extends AudioOutputPickerPlatform {
         final device = jsDevices[i];
         if (device.kind == 'audioinput') {
           final id = device.deviceId;
-          final label = device.label.isNotEmpty ? device.label : 'Microphone ${devices.length + 1}';
+          final label = device.label.isNotEmpty
+              ? device.label
+              : 'Microphone ${devices.length + 1}';
           devices.add(
             AudioInputDevice(
               id: id,
@@ -148,10 +159,18 @@ class AudioOutputPickerWeb extends AudioOutputPickerPlatform {
     final mics = await getAvailableMicrophones();
     return mics.firstWhere(
       (d) => d.isSelected,
-      orElse: () => mics.isNotEmpty ? mics.first : const AudioInputDevice(id: 'default', name: 'Default Microphone', type: AudioInputType.builtInMic, isSelected: true),
+      orElse: () => mics.isNotEmpty
+          ? mics.first
+          : const AudioInputDevice(
+              id: 'default',
+              name: 'Default Microphone',
+              type: AudioInputType.builtInMic,
+              isSelected: true,
+            ),
     );
   }
 
   @override
-  Stream<Map<String, dynamic>> get audioDeviceEventStream => _eventController.stream;
+  Stream<Map<String, dynamic>> get audioDeviceEventStream =>
+      _eventController.stream;
 }

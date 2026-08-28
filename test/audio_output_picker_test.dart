@@ -24,55 +24,55 @@ class MockAudioOutputPickerPlatform
 
   @override
   Future<List<AudioOutputDevice>> getAvailableAudioOutputs() => Future.value([
-        const AudioOutputDevice(
-          id: 'test_speaker',
-          name: 'Speaker',
-          type: AudioOutputType.speaker,
-          isSelected: true,
-        ),
-        const AudioOutputDevice(
-          id: 'test_headphones',
-          name: 'Headphones',
-          type: AudioOutputType.wiredHeadphones,
-          isSelected: false,
-        ),
-      ]);
+    const AudioOutputDevice(
+      id: 'test_speaker',
+      name: 'Speaker',
+      type: AudioOutputType.speaker,
+      isSelected: true,
+    ),
+    const AudioOutputDevice(
+      id: 'test_headphones',
+      name: 'Headphones',
+      type: AudioOutputType.wiredHeadphones,
+      isSelected: false,
+    ),
+  ]);
 
   @override
   Future<bool> selectAudioOutput(String deviceId) => Future.value(true);
 
   @override
   Future<AudioOutputDevice?> getCurrentAudioOutput() => Future.value(
-        const AudioOutputDevice(
-          id: 'test_speaker',
-          name: 'Speaker',
-          type: AudioOutputType.speaker,
-          isSelected: true,
-        ),
-      );
+    const AudioOutputDevice(
+      id: 'test_speaker',
+      name: 'Speaker',
+      type: AudioOutputType.speaker,
+      isSelected: true,
+    ),
+  );
 
   @override
   Future<List<AudioInputDevice>> getAvailableMicrophones() => Future.value([
-        const AudioInputDevice(
-          id: 'test_mic',
-          name: 'Built-in Mic',
-          type: AudioInputType.builtInMic,
-          isSelected: true,
-        ),
-      ]);
+    const AudioInputDevice(
+      id: 'test_mic',
+      name: 'Built-in Mic',
+      type: AudioInputType.builtInMic,
+      isSelected: true,
+    ),
+  ]);
 
   @override
   Future<bool> selectMicrophone(String deviceId) => Future.value(true);
 
   @override
   Future<AudioInputDevice?> getCurrentMicrophone() => Future.value(
-        const AudioInputDevice(
-          id: 'test_mic',
-          name: 'Built-in Mic',
-          type: AudioInputType.builtInMic,
-          isSelected: true,
-        ),
-      );
+    const AudioInputDevice(
+      id: 'test_mic',
+      name: 'Built-in Mic',
+      type: AudioInputType.builtInMic,
+      isSelected: true,
+    ),
+  );
 
   @override
   Stream<Map<String, dynamic>> get audioDeviceEventStream =>
@@ -80,7 +80,8 @@ class MockAudioOutputPickerPlatform
 }
 
 void main() {
-  final AudioOutputPickerPlatform initialPlatform = AudioOutputPickerPlatform.instance;
+  final AudioOutputPickerPlatform initialPlatform =
+      AudioOutputPickerPlatform.instance;
 
   test('$MethodChannelAudioOutputPicker is the default instance', () {
     expect(initialPlatform, isInstanceOf<MethodChannelAudioOutputPicker>());
@@ -88,7 +89,8 @@ void main() {
 
   test('getPlatformVersion', () async {
     AudioOutputPicker audioOutputPickerPlugin = AudioOutputPicker();
-    MockAudioOutputPickerPlatform fakePlatform = MockAudioOutputPickerPlatform();
+    MockAudioOutputPickerPlatform fakePlatform =
+        MockAudioOutputPickerPlatform();
     AudioOutputPickerPlatform.instance = fakePlatform;
 
     expect(await audioOutputPickerPlugin.getPlatformVersion(), '42');
@@ -96,7 +98,8 @@ void main() {
 
   test('checkBluetoothPermission and requestBluetoothPermission', () async {
     AudioOutputPicker audioOutputPickerPlugin = AudioOutputPicker();
-    MockAudioOutputPickerPlatform fakePlatform = MockAudioOutputPickerPlatform();
+    MockAudioOutputPickerPlatform fakePlatform =
+        MockAudioOutputPickerPlatform();
     AudioOutputPickerPlatform.instance = fakePlatform;
 
     expect(await audioOutputPickerPlugin.checkBluetoothPermission(), true);
@@ -107,48 +110,61 @@ void main() {
 
   test('checkMicrophonePermission and requestMicrophonePermission', () async {
     AudioOutputPicker audioOutputPickerPlugin = AudioOutputPicker();
-    MockAudioOutputPickerPlatform fakePlatform = MockAudioOutputPickerPlatform();
+    MockAudioOutputPickerPlatform fakePlatform =
+        MockAudioOutputPickerPlatform();
     AudioOutputPickerPlatform.instance = fakePlatform;
 
     expect(await audioOutputPickerPlugin.checkMicrophonePermission(), true);
     expect(await audioOutputPickerPlugin.requestMicrophonePermission(), true);
   });
 
-  test('getAvailableOutputs, headphones filter, selectAudioOutput, getCurrentAudioOutput', () async {
-    AudioOutputPicker audioOutputPickerPlugin = AudioOutputPicker();
-    MockAudioOutputPickerPlatform fakePlatform = MockAudioOutputPickerPlatform();
-    AudioOutputPickerPlatform.instance = fakePlatform;
+  test(
+    'getAvailableOutputs, headphones filter, selectAudioOutput, getCurrentAudioOutput',
+    () async {
+      AudioOutputPicker audioOutputPickerPlugin = AudioOutputPicker();
+      MockAudioOutputPickerPlatform fakePlatform =
+          MockAudioOutputPickerPlatform();
+      AudioOutputPickerPlatform.instance = fakePlatform;
 
-    final outputs = await audioOutputPickerPlugin.getAvailableOutputs();
-    expect(outputs.length, 2);
-    expect(outputs.first.name, 'Speaker');
-    expect(outputs.first.type, AudioOutputType.speaker);
+      final outputs = await audioOutputPickerPlugin.getAvailableOutputs();
+      expect(outputs.length, 2);
+      expect(outputs.first.name, 'Speaker');
+      expect(outputs.first.type, AudioOutputType.speaker);
 
-    final headphones = await audioOutputPickerPlugin.getAvailableHeadphonesAndBluetooth();
-    expect(headphones.length, 1);
-    expect(headphones.first.id, 'test_headphones');
+      final headphones = await audioOutputPickerPlugin
+          .getAvailableHeadphonesAndBluetooth();
+      expect(headphones.length, 1);
+      expect(headphones.first.id, 'test_headphones');
 
-    expect(await audioOutputPickerPlugin.selectAudioOutput('test_speaker'), true);
-    expect(await audioOutputPickerPlugin.selectOutput(outputs.first), true);
+      expect(
+        await audioOutputPickerPlugin.selectAudioOutput('test_speaker'),
+        true,
+      );
+      expect(await audioOutputPickerPlugin.selectOutput(outputs.first), true);
 
-    final current = await audioOutputPickerPlugin.getCurrentAudioOutput();
-    expect(current?.id, 'test_speaker');
-  });
+      final current = await audioOutputPickerPlugin.getCurrentAudioOutput();
+      expect(current?.id, 'test_speaker');
+    },
+  );
 
-  test('getAvailableMicrophones, selectMicrophone, getCurrentMicrophone', () async {
-    AudioOutputPicker audioOutputPickerPlugin = AudioOutputPicker();
-    MockAudioOutputPickerPlatform fakePlatform = MockAudioOutputPickerPlatform();
-    AudioOutputPickerPlatform.instance = fakePlatform;
+  test(
+    'getAvailableMicrophones, selectMicrophone, getCurrentMicrophone',
+    () async {
+      AudioOutputPicker audioOutputPickerPlugin = AudioOutputPicker();
+      MockAudioOutputPickerPlatform fakePlatform =
+          MockAudioOutputPickerPlatform();
+      AudioOutputPickerPlatform.instance = fakePlatform;
 
-    final mics = await audioOutputPickerPlugin.getAvailableMicrophones();
-    expect(mics.length, 1);
-    expect(mics.first.name, 'Built-in Mic');
-    expect(mics.first.type, AudioInputType.builtInMic);
+      final mics = await audioOutputPickerPlugin.getAvailableMicrophones();
+      expect(mics.length, 1);
+      expect(mics.first.name, 'Built-in Mic');
+      expect(mics.first.type, AudioInputType.builtInMic);
 
-    expect(await audioOutputPickerPlugin.selectMicrophone('test_mic'), true);
-    expect(await audioOutputPickerPlugin.selectInput(mics.first), true);
+      expect(await audioOutputPickerPlugin.selectMicrophone('test_mic'), true);
+      expect(await audioOutputPickerPlugin.selectInput(mics.first), true);
 
-    final current = await audioOutputPickerPlugin.getCurrentMicrophone();
-    expect(current?.id, 'test_mic');
-  });
+      final current = await audioOutputPickerPlugin.getCurrentMicrophone();
+      expect(current?.id, 'test_mic');
+    },
+  );
 }

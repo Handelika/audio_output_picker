@@ -340,7 +340,9 @@ class _AudioPickerHomeScreenState extends State<AudioPickerHomeScreen> {
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
-                  _hasBtPermission ? 'Bluetooth OK' : 'Bluetooth Permission Needed',
+                  _hasBtPermission
+                      ? 'Bluetooth OK'
+                      : 'Bluetooth Permission Needed',
                   style: theme.textTheme.bodySmall,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -360,18 +362,14 @@ class _AudioPickerHomeScreenState extends State<AudioPickerHomeScreen> {
           Row(
             children: [
               Icon(
-                _hasMicPermission
-                    ? Icons.mic_rounded
-                    : Icons.mic_off_rounded,
+                _hasMicPermission ? Icons.mic_rounded : Icons.mic_off_rounded,
                 size: 16,
                 color: _hasMicPermission ? Colors.green : colorScheme.error,
               ),
               const SizedBox(width: 6),
               Expanded(
                 child: Text(
-                  _hasMicPermission
-                      ? 'Microphone OK'
-                      : 'Mic Permission Needed',
+                  _hasMicPermission ? 'Microphone OK' : 'Mic Permission Needed',
                   style: theme.textTheme.bodySmall,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -397,17 +395,10 @@ class _AudioPickerHomeScreenState extends State<AudioPickerHomeScreen> {
   // Audio Outputs (Speaker, Headphones, Bluetooth)
   // ==========================================
 
-  Widget _buildOutputSectionHeader(
-    ThemeData theme,
-    ColorScheme colorScheme,
-  ) {
+  Widget _buildOutputSectionHeader(ThemeData theme, ColorScheme colorScheme) {
     return Row(
       children: [
-        Icon(
-          Icons.headphones_rounded,
-          size: 20,
-          color: colorScheme.primary,
-        ),
+        Icon(Icons.headphones_rounded, size: 20, color: colorScheme.primary),
         const SizedBox(width: 8),
         Expanded(
           child: Text(
@@ -595,8 +586,9 @@ class _AudioPickerHomeScreenState extends State<AudioPickerHomeScreen> {
                   spacing: 8,
                   runSpacing: 8,
                   children: devices.map((d) {
-                    final isSelected =
-                        _currentOutput != null ? d.id == _currentOutput?.id : d.isSelected;
+                    final isSelected = _currentOutput != null
+                        ? d.id == _currentOutput?.id
+                        : d.isSelected;
                     return InkWell(
                       onTap: () async {
                         await _picker.selectOutput(d);
@@ -866,8 +858,9 @@ class _AudioPickerHomeScreenState extends State<AudioPickerHomeScreen> {
                   spacing: 8,
                   runSpacing: 8,
                   children: mics.map((m) {
-                    final isSelected =
-                        _currentMic != null ? m.id == _currentMic?.id : m.isSelected;
+                    final isSelected = _currentMic != null
+                        ? m.id == _currentMic?.id
+                        : m.isSelected;
                     return InkWell(
                       onTap: () async {
                         await _picker.selectInput(m);

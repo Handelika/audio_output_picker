@@ -30,27 +30,37 @@ abstract class AudioOutputPickerPlatform extends PlatformInterface {
 
   /// Checks if required bluetooth permissions (e.g. Bluetooth Connect on Android 12+) are granted.
   Future<bool> checkBluetoothPermission() {
-    throw UnimplementedError('checkBluetoothPermission() has not been implemented.');
+    throw UnimplementedError(
+      'checkBluetoothPermission() has not been implemented.',
+    );
   }
 
   /// Requests required bluetooth permissions directly without 3rd party plugins.
   Future<bool> requestBluetoothPermission() {
-    throw UnimplementedError('requestBluetoothPermission() has not been implemented.');
+    throw UnimplementedError(
+      'requestBluetoothPermission() has not been implemented.',
+    );
   }
 
   /// Checks if microphone recording permission is granted.
   Future<bool> checkMicrophonePermission() {
-    throw UnimplementedError('checkMicrophonePermission() has not been implemented.');
+    throw UnimplementedError(
+      'checkMicrophonePermission() has not been implemented.',
+    );
   }
 
   /// Requests microphone recording permission directly.
   Future<bool> requestMicrophonePermission() {
-    throw UnimplementedError('requestMicrophonePermission() has not been implemented.');
+    throw UnimplementedError(
+      'requestMicrophonePermission() has not been implemented.',
+    );
   }
 
   /// Gets the list of available audio output devices.
   Future<List<AudioOutputDevice>> getAvailableAudioOutputs() {
-    throw UnimplementedError('getAvailableAudioOutputs() has not been implemented.');
+    throw UnimplementedError(
+      'getAvailableAudioOutputs() has not been implemented.',
+    );
   }
 
   /// Selects the audio output device with the given [deviceId].
@@ -60,12 +70,16 @@ abstract class AudioOutputPickerPlatform extends PlatformInterface {
 
   /// Gets the currently active audio output device, or null if none/unknown.
   Future<AudioOutputDevice?> getCurrentAudioOutput() {
-    throw UnimplementedError('getCurrentAudioOutput() has not been implemented.');
+    throw UnimplementedError(
+      'getCurrentAudioOutput() has not been implemented.',
+    );
   }
 
   /// Gets the list of available microphone / audio input devices.
   Future<List<AudioInputDevice>> getAvailableMicrophones() {
-    throw UnimplementedError('getAvailableMicrophones() has not been implemented.');
+    throw UnimplementedError(
+      'getAvailableMicrophones() has not been implemented.',
+    );
   }
 
   /// Selects the microphone / audio input device with the given [deviceId].
@@ -75,11 +89,15 @@ abstract class AudioOutputPickerPlatform extends PlatformInterface {
 
   /// Gets the currently active microphone / audio input device, or null if none/unknown.
   Future<AudioInputDevice?> getCurrentMicrophone() {
-    throw UnimplementedError('getCurrentMicrophone() has not been implemented.');
+    throw UnimplementedError(
+      'getCurrentMicrophone() has not been implemented.',
+    );
   }
 
   /// Stream of raw device / route change events from the native platform.
   Stream<Map<String, dynamic>> get audioDeviceEventStream {
-    throw UnimplementedError('audioDeviceEventStream has not been implemented.');
+    throw UnimplementedError(
+      'audioDeviceEventStream has not been implemented.',
+    );
   }
 }

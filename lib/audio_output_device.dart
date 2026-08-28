@@ -58,7 +58,10 @@ enum AudioOutputType {
   }
 
   /// Whether this output is an external audio device (not built-in speaker/receiver).
-  bool get isExternal => this != AudioOutputType.speaker && this != AudioOutputType.receiver && this != AudioOutputType.unknown;
+  bool get isExternal =>
+      this != AudioOutputType.speaker &&
+      this != AudioOutputType.receiver &&
+      this != AudioOutputType.unknown;
 
   String toDisplayString() {
     switch (this) {
@@ -206,7 +209,8 @@ enum AudioInputType {
   }
 
   /// Whether this microphone is external (wired headset mic, bluetooth headset, USB mic).
-  bool get isExternal => this != AudioInputType.builtInMic && this != AudioInputType.unknown;
+  bool get isExternal =>
+      this != AudioInputType.builtInMic && this != AudioInputType.unknown;
 
   String toDisplayString() {
     switch (this) {

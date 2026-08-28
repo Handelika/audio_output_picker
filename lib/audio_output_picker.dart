@@ -239,7 +239,9 @@ class AudioOutputPicker {
           ? await getAvailableHeadphonesAndBluetooth()
           : await getAvailableOutputs();
     } catch (e) {
-      debugPrint('AudioPicker: showAudioOutputPickerPopup error fetching devices: $e');
+      debugPrint(
+        'AudioPicker: showAudioOutputPickerPopup error fetching devices: $e',
+      );
       outputs = const [
         AudioOutputDevice(
           id: 'builtin_speaker',
@@ -260,7 +262,8 @@ class AudioOutputPicker {
           return _AudioOutputPickerSheet(
             outputs: outputs,
             title: title,
-            subtitle: subtitle ??
+            subtitle:
+                subtitle ??
                 (onlyHeadphonesAndBluetooth
                     ? 'Select headphones or bluetooth output'
                     : 'Select audio playback destination'),
@@ -296,7 +299,9 @@ class AudioOutputPicker {
     try {
       microphones = await getAvailableMicrophones();
     } catch (e) {
-      debugPrint('AudioPicker: showMicrophonePickerPopup error fetching devices: $e');
+      debugPrint(
+        'AudioPicker: showMicrophonePickerPopup error fetching devices: $e',
+      );
       microphones = const [
         AudioInputDevice(
           id: 'builtin_mic',
@@ -354,7 +359,8 @@ class _AudioOutputPickerSheet extends StatefulWidget {
   final ValueChanged<AudioOutputDevice> onSelect;
 
   @override
-  State<_AudioOutputPickerSheet> createState() => _AudioOutputPickerSheetState();
+  State<_AudioOutputPickerSheet> createState() =>
+      _AudioOutputPickerSheetState();
 }
 
 class _AudioOutputPickerSheetState extends State<_AudioOutputPickerSheet> {
@@ -366,7 +372,9 @@ class _AudioOutputPickerSheetState extends State<_AudioOutputPickerSheet> {
     super.initState();
     _devices = List.from(widget.outputs);
     final selected = _devices.where((d) => d.isSelected);
-    _selectedId = selected.isNotEmpty ? selected.first.id : (_devices.isNotEmpty ? _devices.first.id : null);
+    _selectedId = selected.isNotEmpty
+        ? selected.first.id
+        : (_devices.isNotEmpty ? _devices.first.id : null);
   }
 
   IconData _getDeviceIcon(AudioOutputType type) {
@@ -448,7 +456,8 @@ class _AudioOutputPickerSheetState extends State<_AudioOutputPickerSheet> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            widget.subtitle ?? 'Select audio playback destination',
+                            widget.subtitle ??
+                                'Select audio playback destination',
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: colorScheme.onSurfaceVariant,
                             ),
@@ -491,13 +500,17 @@ class _AudioOutputPickerSheetState extends State<_AudioOutputPickerSheet> {
                     physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     itemCount: _devices.length,
-                    separatorBuilder: (_, _) => const Divider(height: 1, indent: 64),
+                    separatorBuilder: (_, _) =>
+                        const Divider(height: 1, indent: 64),
                     itemBuilder: (ctx, index) {
                       final device = _devices[index];
                       final isCurrent = device.id == _selectedId;
 
                       return ListTile(
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 4,
+                        ),
                         leading: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
                           padding: const EdgeInsets.all(10),
@@ -518,8 +531,12 @@ class _AudioOutputPickerSheetState extends State<_AudioOutputPickerSheet> {
                         title: Text(
                           device.name,
                           style: theme.textTheme.bodyLarge?.copyWith(
-                            fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
-                            color: isCurrent ? colorScheme.primary : colorScheme.onSurface,
+                            fontWeight: isCurrent
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                            color: isCurrent
+                                ? colorScheme.primary
+                                : colorScheme.onSurface,
                           ),
                         ),
                         subtitle: Text(
@@ -580,7 +597,9 @@ class _MicrophonePickerSheetState extends State<_MicrophonePickerSheet> {
     super.initState();
     _devices = List.from(widget.microphones);
     final selected = _devices.where((d) => d.isSelected);
-    _selectedId = selected.isNotEmpty ? selected.first.id : (_devices.isNotEmpty ? _devices.first.id : null);
+    _selectedId = selected.isNotEmpty
+        ? selected.first.id
+        : (_devices.isNotEmpty ? _devices.first.id : null);
   }
 
   IconData _getInputIcon(AudioInputType type) {
@@ -656,7 +675,8 @@ class _MicrophonePickerSheetState extends State<_MicrophonePickerSheet> {
                           ),
                           const SizedBox(height: 2),
                           Text(
-                            widget.subtitle ?? 'Select audio input / recording source',
+                            widget.subtitle ??
+                                'Select audio input / recording source',
                             style: theme.textTheme.bodySmall?.copyWith(
                               color: colorScheme.onSurfaceVariant,
                             ),
@@ -699,13 +719,17 @@ class _MicrophonePickerSheetState extends State<_MicrophonePickerSheet> {
                     physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     itemCount: _devices.length,
-                    separatorBuilder: (_, _) => const Divider(height: 1, indent: 64),
+                    separatorBuilder: (_, _) =>
+                        const Divider(height: 1, indent: 64),
                     itemBuilder: (ctx, index) {
                       final device = _devices[index];
                       final isCurrent = device.id == _selectedId;
 
                       return ListTile(
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 4,
+                        ),
                         leading: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
                           padding: const EdgeInsets.all(10),
@@ -726,8 +750,12 @@ class _MicrophonePickerSheetState extends State<_MicrophonePickerSheet> {
                         title: Text(
                           device.name,
                           style: theme.textTheme.bodyLarge?.copyWith(
-                            fontWeight: isCurrent ? FontWeight.bold : FontWeight.normal,
-                            color: isCurrent ? colorScheme.secondary : colorScheme.onSurface,
+                            fontWeight: isCurrent
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                            color: isCurrent
+                                ? colorScheme.secondary
+                                : colorScheme.onSurface,
                           ),
                         ),
                         subtitle: Text(
